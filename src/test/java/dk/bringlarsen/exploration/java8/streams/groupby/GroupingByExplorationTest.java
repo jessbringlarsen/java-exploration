@@ -39,6 +39,7 @@ public class GroupingByExplorationTest {
         Map<Integer, Long> result = persons.stream()
                 .collect(groupingBy(Person::getAge, counting()));
 
+        assertThat(result.size(), is(2));
         assertThat(new ArrayList<>(result.values()), everyItem(is(2L)));
     }
 
@@ -54,6 +55,7 @@ public class GroupingByExplorationTest {
                 .collect(groupingBy(Person::getAge,
                         mapping(Person::getName, toSet())));
 
+        assertThat(result.size(), is(2));
         assertThat(new ArrayList<>(result.values()), everyItem(iterableWithSize(1)));
     }
 
@@ -68,6 +70,7 @@ public class GroupingByExplorationTest {
         Map<Integer, Integer> result = persons.stream()
                 .collect(groupingBy(Person::getAge, summingInt(Person::getWeight)));
 
+        assertThat(result.size(), is(2));
         assertThat(new ArrayList<>(result.values()), everyItem(is(160)));
     }
 }
