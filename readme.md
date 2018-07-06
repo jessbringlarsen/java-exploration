@@ -1,2 +1,2 @@
-# Java 8 exploration
-Project for experimenting with the new apis in Java 8.
+# Java API exploration
+Project for experimenting with Java APIs.

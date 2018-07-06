@@ -1,6 +1,6 @@
-package dk.bringlarsen.exploration.java8.streams;
+package dk.bringlarsen.exploration.java.streams;
 
-import dk.bringlarsen.exploration.java8.model.Person;
+import dk.bringlarsen.exploration.java.model.Person;
 import org.junit.Test;
 
 import java.util.*;

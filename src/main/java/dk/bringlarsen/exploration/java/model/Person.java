@@ -1,4 +1,4 @@
-package dk.bringlarsen.exploration.java8.model;
+package dk.bringlarsen.exploration.java.model;
 
 import java.util.ArrayList;
 import java.util.List;
