@@ -1,12 +1,14 @@
 package dk.bringlarsen.exploration.java8.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Person {
     private int age;
     private int weight;
-    private String name;
-
+    private final String name;
+    private final List<String> countriesVisited = new ArrayList<>();
 
     public static Person create(int age, int weight, String name) {
         return new Person(age, weight, name);
@@ -26,6 +28,11 @@ public class Person {
         this.name = name;
     }
 
+    public Person addCountryVisited(String country) {
+        countriesVisited.add(country);
+        return this;
+    }
+
     public int getAge() {
         return age;
     }
@@ -36,6 +43,10 @@ public class Person {
 
     public String getName() {
         return name;
+    }
+
+    public List<String> getCountriesVisited() {
+        return countriesVisited;
     }
 
     @Override

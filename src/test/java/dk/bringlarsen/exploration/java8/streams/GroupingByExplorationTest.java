@@ -1,4 +1,4 @@
-package dk.bringlarsen.exploration.java8.streams.groupby;
+package dk.bringlarsen.exploration.java8.streams;
 
 import dk.bringlarsen.exploration.java8.model.Person;
 import org.junit.Test;
