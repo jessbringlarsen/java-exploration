@@ -12,6 +12,14 @@ public class Person {
         return new Person(age, weight, name);
     }
 
+    public static Person create(int age, String name) {
+        return new Person(age, 80, name);
+    }
+
+    public static Person create(String name) {
+        return new Person(20, 80, name);
+    }
+
     private Person(int age, int weight, String name) {
         this.age = age;
         this.weight = weight;

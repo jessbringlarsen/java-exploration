@@ -15,10 +15,10 @@ public class GroupingByExplorationTest {
     @Test
     public void testGroupByAge() {
         List<Person> persons = Arrays.asList(
-                Person.create(20, 80,"Person1"),
-                Person.create(20, 80,"Person2"),
-                Person.create(23, 80,"Person3"),
-                Person.create(23, 80,"Person4"));
+                Person.create(20, "Person1"),
+                Person.create(20, "Person2"),
+                Person.create(23, "Person3"),
+                Person.create(23, "Person4"));
 
         Map<Integer, List<Person>> result = persons.stream()
                 .collect(groupingBy(Person::getAge));
@@ -31,10 +31,10 @@ public class GroupingByExplorationTest {
     @Test
     public void testGroupByAgeAndCount() {
         List<Person> persons = Arrays.asList(
-                Person.create(20, 80,"Person1"),
-                Person.create(20, 80,"Person2"),
-                Person.create(23, 80,"Person3"),
-                Person.create(23, 80,"Person4"));
+                Person.create(20, "Person1"),
+                Person.create(20, "Person2"),
+                Person.create(23, "Person3"),
+                Person.create(23, "Person4"));
 
         Map<Integer, Long> result = persons.stream()
                 .collect(groupingBy(Person::getAge, counting()));
@@ -46,10 +46,10 @@ public class GroupingByExplorationTest {
     @Test
     public void testGroupByAgeAndCollectUniqueNames() {
         List<Person> persons = Arrays.asList(
-                Person.create(20, 80,"Person1"),
-                Person.create(20, 80,"Person1"),
-                Person.create(23, 80,"Person2"),
-                Person.create(23, 80,"Person2"));
+                Person.create(20, "Person1"),
+                Person.create(20, "Person1"),
+                Person.create(23, "Person2"),
+                Person.create(23, "Person2"));
 
         Map<Integer, Set<String>> result = persons.stream()
                 .collect(groupingBy(Person::getAge,
