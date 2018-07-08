@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="java8-exploration" />
+        <module name="java-exploration" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="java-exploration" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
