@@ -1,2 +1,2 @@
 # Java API exploration
-Project for experimenting with Java APIs.
+My personal project for exploring Java APIs.
