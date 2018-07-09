@@ -11,13 +11,23 @@ import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.startsWith;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.everyItem;
 import static org.junit.Assert.assertThat;
 
 public class StreamExplorationTest {
 
     @Test
-    public void createStreamOfNumbers() {
+    public void createStreamOfIntegers() {
+        List<Integer> result = Stream.of(1, 2, 3)
+                .collect(toList());
+
+        assertThat(result.size(), is(3));
+        assertThat(result, contains(1, 2, 3));
+    }
+
+    @Test
+    public void createStreamIterate() {
         LinkedList<Integer> result = Stream.iterate(1, i -> i + 1)
                     .limit(100)
                     .collect(toCollection(LinkedList::new));
