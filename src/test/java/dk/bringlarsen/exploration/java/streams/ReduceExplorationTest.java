@@ -12,6 +12,9 @@ import java.util.function.BinaryOperator;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Use Reduce when you want to reduce a collection to a single item.
+ */
 public class ReduceExplorationTest {
 
     @Test
