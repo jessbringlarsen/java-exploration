@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static dk.bringlarsen.exploration.java.matcher.PersonOlderThan.personOlderThan;
+import static dk.bringlarsen.exploration.java.hamcrest.matcher.PersonOlderThan.personOlderThan;
 import static java.util.stream.Collectors.toList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.everyItem;

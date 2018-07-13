@@ -1,4 +1,4 @@
-package dk.bringlarsen.exploration.java.matcher;
+package dk.bringlarsen.exploration.java.hamcrest.matcher;
 
 import dk.bringlarsen.exploration.java.model.Person;
 import org.hamcrest.Description;
