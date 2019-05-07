@@ -1,6 +1,9 @@
 version: 0.2
 phases: 
-  build.commands: mvn -V -U -e package
+  build: 
+    commands: mvn -V -U -e package
   install: 
-    runtime-versions.java: openjdk8
-artifacts.files: target/*.jar
+    runtime-versions:
+      java: openjdk8
+artifacts
+  files: target/*.jar
