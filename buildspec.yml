@@ -2,6 +2,7 @@ version: 0.2
 phases: 
   build: 
     commands: 
-      - mvn -V -U -e package
+      - mvn -V -U -e package -Dskiptests
+      - mvn -V -U -e surefire-report:report
 artifacts:
   files: target/*.jar
