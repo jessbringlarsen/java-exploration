@@ -4,12 +4,12 @@ phases:
     commands: 
       - > 
         mvn -V -U -e package sonar:sonar 
-          -Dskiptests 
-          -Dsonar.projectKey=jessbringlarsen_java-exploration 
-          -Dsonar.organization=jessbringlarsen-github 
-          -Dsonar.host.url=https://sonarcloud.io 
-          -Dsonar.login=506af4e334e4792e490ff68d51fa7d50db9454ef 
-          -Dsonar.java.libraries=target/*.jar
+        -Dskiptests 
+        -Dsonar.projectKey=jessbringlarsen_java-exploration 
+        -Dsonar.organization=jessbringlarsen-github 
+        -Dsonar.host.url=https://sonarcloud.io 
+        -Dsonar.login=506af4e334e4792e490ff68d51fa7d50db9454ef 
+        -Dsonar.java.libraries=target/*.jar
       - mvn -V -U -e surefire-report:report
 artifacts:
   files: 
