@@ -27,7 +27,7 @@ public class FileAttributeViewExplorationTest {
 
     @Before
     public void createFile() throws IOException {
-        Path tempDir = Paths.get(System.getenv("TEMP"));
+        Path tempDir = Paths.get("target/");
         tempFile = Files.createTempFile(tempDir, UUID.randomUUID().toString(), ".tmp");
         Files.write(tempFile, "test".getBytes(), StandardOpenOption.APPEND);
     }
