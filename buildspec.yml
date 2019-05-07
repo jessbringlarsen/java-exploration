@@ -8,3 +8,6 @@ artifacts:
   files: 
     - 'target/*.jar'
     - 'target/site/*.html'
+cache:
+  paths:
+    - '/root/.m2/**/*'
