@@ -5,4 +5,6 @@ phases:
       - mvn -V -U -e package -Dskiptests
       - mvn -V -U -e surefire-report:report
 artifacts:
-  files: target/*.jar
+  files: 
+    - target/*.jar
+    - target/site/*.html
