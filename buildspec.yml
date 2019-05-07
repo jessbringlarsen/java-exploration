@@ -1,13 +1,10 @@
 version: 0.2
-
-phases:
-  install:
-    runtime-versions:
+phases: 
+  build: 
+    commands: 
+      mvn -V -U -e package
+  install: 
+    runtime-versions: 
       java: openjdk8
-  build:
-    commands:
-      - echo Build started on `date`
-      - mvn -V -U -e package
-artifacts:
-  files:
-    - target/java-exploration-1.0-SNAPSHOT.jar
+  artifacts: 
+    files: target/*.jar
