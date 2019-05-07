@@ -6,8 +6,5 @@ phases:
       - mvn -V -U -e surefire-report:report
 artifacts:
   files: 
-    - target/*.jar
-  secondary-artifacts:
-    artifact1:
-      files:
-        - target/site/*.html
+    - 'target/*.jar'
+    - 'target/site/*.html'
