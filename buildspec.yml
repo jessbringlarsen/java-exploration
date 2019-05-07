@@ -3,11 +3,11 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: openjdk11
+      java: openjdk-8
   build:
     commands:
       - echo Build started on `date`
       - mvn -V -U -e package
 artifacts:
   files:
-    - target/messageUtil-1.0.jar
+    - target/java-exploration-1.0-SNAPSHOT.jar
