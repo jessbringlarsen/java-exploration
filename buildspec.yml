@@ -5,5 +5,5 @@ phases:
   install: 
     runtime-versions:
       java: openjdk8
-artifacts
+artifacts:
   files: target/*.jar
