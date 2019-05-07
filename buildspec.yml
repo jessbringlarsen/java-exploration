@@ -4,7 +4,7 @@ phases:
     commands: 
       - > 
         mvn -V -U -e package sonar:sonar 
-        -Dskiptests 
+        -DskipTests 
         -Dsonar.projectKey=jessbringlarsen_java-exploration 
         -Dsonar.organization=jessbringlarsen-github 
         -Dsonar.host.url=https://sonarcloud.io 
