@@ -24,10 +24,15 @@ public class RandomAccessExplorationTest {
     private Path tempFile;
 
     @Before
-    public void createFile() throws IOException {
+    public void setup() throws IOException {
         Path tempDir = Paths.get("target/");
         tempFile = Files.createTempFile(tempDir, UUID.randomUUID().toString(), ".tmp");
         
+    }
+
+    @After
+    public void teardown() throws IOException {
+        Files.deleteIfExists(tempFile);
     }
 
     @Test
@@ -50,10 +55,5 @@ public class RandomAccessExplorationTest {
         try(RandomAccessFile writeFile = new RandomAccessFile(tempFile.toFile(), "r")) {
             writeFile.writeBytes("first line");
         }
-    }
-
-    @After
-    public void tearDown() {
-        tempFile.toFile().delete();
     }
 }
