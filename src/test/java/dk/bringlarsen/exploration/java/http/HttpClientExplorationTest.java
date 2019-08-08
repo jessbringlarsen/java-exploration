@@ -40,25 +40,24 @@ public class HttpClientExplorationTest {
 
     @Test
     public void simpleGet() throws URISyntaxException, IOException, InterruptedException {
-        String url = wireMockRule.url("/persons/1");
+        HttpRequest request = HttpRequest.newBuilder(new URI(wireMockRule.url("/persons/1"))).GET().build();
+
         HttpResponse<String> response = HttpClient.newHttpClient()
-        .send(HttpRequest.newBuilder(new URI(url)).GET().build(), 
-            HttpResponse.BodyHandlers.ofString());
+        .send(request, HttpResponse.BodyHandlers.ofString());
     
         assertThat(response.body(), CoreMatchers.is("id: 1"));
     }
 
     @Test
     public void asyncGet() throws URISyntaxException {
-        List<URI> targets = Arrays.asList(
-                new URI(wireMockRule.url("/persons/1")),
-                new URI(wireMockRule.url("/persons/2")));
+        List<HttpRequest> requests = Arrays.asList(
+                HttpRequest.newBuilder(new URI(wireMockRule.url("/persons/1"))).GET().build(),
+                HttpRequest.newBuilder(new URI(wireMockRule.url("/persons/2"))).GET().build());
 
         HttpClient client = HttpClient.newHttpClient();
-        LinkedList<CompletableFuture<String>> responses = targets.stream()
-          .map(target -> client
-            .sendAsync(
-              HttpRequest.newBuilder(target).GET().build(), HttpResponse.BodyHandlers.ofString())
+        LinkedList<CompletableFuture<String>> responses = requests.stream()
+          .map(request -> client
+            .sendAsync(request, HttpResponse.BodyHandlers.ofString())
             .thenApply(response -> response.body()))
           .collect(Collectors.toCollection(LinkedList::new));
 
