@@ -19,6 +19,8 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertThat;
@@ -60,6 +62,33 @@ public class HttpClientExplorationTest {
             .sendAsync(request, HttpResponse.BodyHandlers.ofString())
             .thenApply(response -> response.body()))
           .collect(Collectors.toCollection(LinkedList::new));
+
+        List<String> results = responses.stream()
+                .map(CompletableFuture::join)
+                .collect(Collectors.toList());
+
+        assertThat(results, CoreMatchers.hasItems("id: 1", "id: 2"));
+    }
+
+
+    /**
+     * By default, the HttpClient uses executor java.util.concurrent.Executors.newCachedThreadPool()
+     * Example of controlling the thread pool.
+     */
+    @Test
+    public void asyncFixedThreadPoolGet() throws URISyntaxException {
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+
+        List<HttpRequest> requests = Arrays.asList(
+                HttpRequest.newBuilder(new URI(wireMockRule.url("/persons/1"))).GET().build(),
+                HttpRequest.newBuilder(new URI(wireMockRule.url("/persons/2"))).GET().build());
+
+        HttpClient client = HttpClient.newBuilder().executor(executorService).build();
+        LinkedList<CompletableFuture<String>> responses = requests.stream()
+            .map(request -> client
+                .sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(response -> response.body()))
+            .collect(Collectors.toCollection(LinkedList::new));
 
         List<String> results = responses.stream()
                 .map(CompletableFuture::join)
