@@ -11,6 +11,10 @@
     <properties>
             <java.version>11</java.version>
             <project.encoding>utf-8</project.encoding>
+    
+            <sonar.projectKey>jessbringlarsen_java-exploration</sonar.projectKey>
+            <sonar.organization>jessbringlarsen-github</sonar.organization>
+            <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
 
