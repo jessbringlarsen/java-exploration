@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.function.BinaryOperator;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.*;
 
 /**
  * Use Reduce when you want to reduce a collection to a single item.
