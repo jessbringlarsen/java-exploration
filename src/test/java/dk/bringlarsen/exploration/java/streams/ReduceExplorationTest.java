@@ -28,4 +28,17 @@ public class ReduceExplorationTest {
 
         assertThat(result.get().getAge(), is(10));
     }
+
+    @Test
+    public void ageOfAllPersons() {
+        List<Person> persons = Arrays.asList(
+                Person.create(10, "Person1"),
+                Person.create(19, "Person2"));
+
+        int age = persons.stream()
+            .map(Person::getAge)
+            .reduce(0, Integer::sum);
+
+        assertThat(age, is(29));
+    }
 }
