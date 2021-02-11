@@ -1,9 +1,9 @@
 package dk.bringlarsen.exploration.java.nio2;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,34 +16,35 @@ import java.util.Set;
 import java.util.UUID;
 
 import static java.nio.file.Files.*;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.condition.OS.WINDOWS;
 
-public class CreateFileExplorationTest {
+class CreateFileExplorationTest {
 
     private Path tempFile;
 
-    @Before
-    public void createFile() throws IOException {
+    @BeforeEach
+    void createFile() throws IOException {
         Path tempDir = Paths.get("target/");
         tempFile = Files.createTempFile(tempDir, UUID.randomUUID().toString(), ".tmp");
     }
 
-    @After
-    public void teardown() throws IOException {
+    @AfterEach
+    void teardown() throws IOException {
         Files.deleteIfExists(tempFile);
     }
 
     @Test
-    public void createFileTest() {
+    void createFileTest() {
         assertTrue(exists(tempFile));
         assertTrue(isWritable(tempFile));
         assertTrue(isReadable(tempFile));
     }
 
     @Test
-    @Ignore("Only on posix systems")
-    public void createFileWithAttributesTest() throws IOException {
+    @DisabledOnOs(WINDOWS)
+    void createFileWithAttributesTest() throws IOException {
         Set<PosixFilePermission> filePermissions = PosixFilePermissions.fromString("r--r--r--");
         FileAttribute<Set<PosixFilePermission>> fileAttribute = PosixFilePermissions.asFileAttribute(filePermissions);
 

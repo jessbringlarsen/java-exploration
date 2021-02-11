@@ -1,8 +1,10 @@
 package dk.bringlarsen.exploration.java.nio2;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,24 +23,24 @@ import static org.hamcrest.MatcherAssert.assertThat;
 /**
  * FileAttributeView enable querying file attibutes.
  */
-public class FileAttributeViewExplorationTest {
+class FileAttributeViewExplorationTest {
 
     private Path tempFile;
 
-    @Before
-    public void createFile() throws IOException {
+    @BeforeEach
+    void createFile() throws IOException {
         Path tempDir = Paths.get("target/");
         tempFile = Files.createTempFile(tempDir, UUID.randomUUID().toString(), ".tmp");
         Files.write(tempFile, "test".getBytes(), StandardOpenOption.APPEND);
     }
 
-    @After
-    public void teardown() throws IOException {
+    @AfterEach
+    void teardown() throws IOException {
         Files.deleteIfExists(tempFile);
     }
 
     @Test
-    public void readFileAttributes() throws IOException {
+    void readFileAttributes() throws IOException {
         BasicFileAttributeView fileAttributeView = Files.getFileAttributeView(tempFile, BasicFileAttributeView.class);
 
         assertThat(fileAttributeView.readAttributes().isRegularFile(), is(true));
@@ -47,7 +49,7 @@ public class FileAttributeViewExplorationTest {
     }
 
     @Test
-    public void setFileAttributes() throws IOException {
+    void setFileAttributes() throws IOException {
         Instant now = new Date().toInstant();
 
         Files.setLastModifiedTime(tempFile, FileTime.from(now));

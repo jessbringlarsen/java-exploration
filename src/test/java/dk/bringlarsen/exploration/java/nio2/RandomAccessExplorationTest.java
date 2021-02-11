@@ -1,6 +1,8 @@
 package dk.bringlarsen.exploration.java.nio2;
 
-import static org.hamcrest.MatcherAssert.assertThat;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -9,51 +11,44 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
-import org.hamcrest.CoreMatchers;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class RandomAccessExplorationTest {
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
+class RandomAccessExplorationTest {
 
     private Path tempFile;
 
-    @Before
-    public void setup() throws IOException {
+    @BeforeEach
+    void setup() throws IOException {
         Path tempDir = Paths.get("target/");
         tempFile = Files.createTempFile(tempDir, UUID.randomUUID().toString(), ".tmp");
         
     }
 
-    @After
-    public void teardown() throws IOException {
+    @AfterEach
+    void teardown() throws IOException {
         Files.deleteIfExists(tempFile);
     }
 
     @Test
-    public void testWriteAndReadFile() throws Exception {
+    void testWriteAndReadFile() throws Exception {
         try(RandomAccessFile writeFile = new RandomAccessFile(tempFile.toFile(), "rw")) {
             writeFile.writeBytes("first line");
         }
 
         try(RandomAccessFile readFile = new RandomAccessFile(tempFile.toFile(), "r")) {
             String firstLine = readFile.readLine();
-            assertThat(firstLine, CoreMatchers.is("first line"));
+            assertThat(firstLine, is("first line"));
         }
     }
 
     @Test
-    public void whenFileIsOpenInReadOblyModeExpectExceptionOnWrite() throws Exception {
-        expectedException.expect(IOException.class);
-        expectedException.expectMessage("Bad file descriptor");
-
+    void whenFileIsOpenInReadOnlyModeExpectExceptionOnWrite() throws Exception {
         try(RandomAccessFile writeFile = new RandomAccessFile(tempFile.toFile(), "r")) {
-            writeFile.writeBytes("first line");
+            IOException ioException = assertThrows(IOException.class, () -> writeFile.writeBytes("first line"));
+            
+            assertThat(ioException.getMessage(), is("Access is denied"));
         }
     }
 }
