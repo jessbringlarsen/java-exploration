@@ -3,11 +3,7 @@
 # Edit at https://www.gitignore.io/?templates=java,maven,intellij+iml,eclipse,code
 
 ### Code ###
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+.vscode/
 
 ### Eclipse ###
 .metadata
@@ -197,3 +193,6 @@ buildNumber.properties
 # End of https://www.gitignore.io/api/java,maven,intellij+iml,eclipse,code
 
 .history/
+
+# Custom
+.idea/
