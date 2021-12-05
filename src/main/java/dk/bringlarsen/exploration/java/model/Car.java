@@ -1,5 +1,7 @@
 package dk.bringlarsen.exploration.java.model;
 
+import dk.bringlarsen.exploration.java.JDK;
+
 /**
  * Properties of a record:
  * <ul>
@@ -11,6 +13,7 @@ package dk.bringlarsen.exploration.java.model;
  * <li>toString method that includes the name of the class and the name of each field and its corresponding value
  * </ul>
  */
+@JDK(version = 14, description = "Java records")
 public record Car(String make, String model) {
 
     public Car(String make) {
