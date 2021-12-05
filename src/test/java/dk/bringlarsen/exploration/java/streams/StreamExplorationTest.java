@@ -1,5 +1,6 @@
 package dk.bringlarsen.exploration.java.streams;
 
+import dk.bringlarsen.exploration.java.JDK;
 import org.junit.Test;
 
 import java.util.LinkedList;
@@ -15,6 +16,7 @@ import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.everyItem;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+@JDK(version = 8, description = "Streams API")
 public class StreamExplorationTest {
 
     @Test

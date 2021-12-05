@@ -4,6 +4,7 @@ import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.github.tomakehurst.wiremock.extension.responsetemplating.ResponseTemplateTransformer;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
+import dk.bringlarsen.exploration.java.JDK;
 import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Rule;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
+@JDK(version = 11, description = "HTTPClient")
 public class HttpClientExplorationTest {
 
     @Rule
@@ -60,7 +62,7 @@ public class HttpClientExplorationTest {
         LinkedList<CompletableFuture<String>> responses = requests.stream()
           .map(request -> client
             .sendAsync(request, HttpResponse.BodyHandlers.ofString())
-            .thenApply(response -> response.body()))
+            .thenApply(HttpResponse::body))
           .collect(Collectors.toCollection(LinkedList::new));
 
         List<String> results = responses.stream()
@@ -87,7 +89,7 @@ public class HttpClientExplorationTest {
         LinkedList<CompletableFuture<String>> responses = requests.stream()
             .map(request -> client
                 .sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(response -> response.body()))
+                .thenApply(HttpResponse::body))
             .collect(Collectors.toCollection(LinkedList::new));
 
         List<String> results = responses.stream()
