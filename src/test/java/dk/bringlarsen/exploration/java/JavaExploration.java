@@ -1,8 +1,8 @@
 package dk.bringlarsen.exploration.java;
 
-import io.github.classgraph.*;
-
-import java.util.List;
+import io.github.classgraph.ClassGraph;
+import io.github.classgraph.ClassInfo;
+import io.github.classgraph.ScanResult;
 
 public class JavaExploration {
 
@@ -13,12 +13,12 @@ public class JavaExploration {
                              .acceptPackages(JavaExploration.class.getPackageName())
                              .scan()) {
             for (ClassInfo annotatedClass : scanResult.getClassesWithAnnotation(JDK.class)) {
-                System.out.println(annotatedClass.getName() + " is annotated with " + annotatedClass.getAnnotationInfo());
+                System.out.println(annotatedClass.getSimpleName() + " is annotated with " + annotatedClass.getAnnotationInfo().getAsStringsWithSimpleNames());
             }
             for (ClassInfo classWithAnnotatedMethod : scanResult.getClassesWithMethodAnnotation(JDK.class)) {
-                System.out.println(classWithAnnotatedMethod.getName() + " has methods annotated with :");
-                classWithAnnotatedMethod.getMethodInfo().stream()
-                        .forEach(methodInfo -> System.out.println(methodInfo.getAnnotationInfo(JDK.class)));
+                System.out.println(classWithAnnotatedMethod.getSimpleName() + " has methods annotated with : ");
+                classWithAnnotatedMethod.getMethodInfo()
+                        .forEach(methodInfo -> System.out.print(methodInfo.getAnnotationInfo(JDK.class).toStringWithSimpleNames().indent(2)));
             }
         }
     }
