@@ -1,5 +1,16 @@
 package dk.bringlarsen.exploration.java.model;
 
+/**
+ * Properties of a record:
+ * <ul>
+ * <li>private, final field for each piece of data
+ * <li>getter for each field
+ * <li>public constructor with a corresponding argument for each field
+ * <li>equals method that returns true for objects of the same class when all fields match
+ * <li>hashCode method that returns the same value when all fields match
+ * <li>toString method that includes the name of the class and the name of each field and its corresponding value
+ * </ul>
+ */
 public record Car(String make, String model) {
 
     public Car(String make) {
@@ -9,7 +20,8 @@ public record Car(String make, String model) {
     public static class Build {
         private String make, model;
 
-        private Build() {}
+        private Build() {
+        }
 
         public static Build car() {
             return new Build();
