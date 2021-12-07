@@ -1,5 +1,6 @@
 package dk.bringlarsen.exploration.java.nio2;
 
+import dk.bringlarsen.exploration.java.JDK;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.condition.OS.WINDOWS;
 
+@JDK(version = 7, description = "Java NIO 2")
 class CreateFileExplorationTest {
 
     private Path tempFile;
