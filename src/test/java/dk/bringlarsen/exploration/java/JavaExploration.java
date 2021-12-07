@@ -17,8 +17,10 @@ public class JavaExploration {
             }
             for (ClassInfo classWithAnnotatedMethod : scanResult.getClassesWithMethodAnnotation(JDK.class)) {
                 System.out.println(classWithAnnotatedMethod.getSimpleName() + " has methods annotated with : ");
-                classWithAnnotatedMethod.getMethodInfo()
-                        .forEach(methodInfo -> System.out.print(methodInfo.getAnnotationInfo(JDK.class).toStringWithSimpleNames().indent(2)));
+                classWithAnnotatedMethod.getMethodInfo().stream()
+                        .map(methodInfo -> methodInfo.getAnnotationInfo(JDK.class))
+                        .filter(annotationInfo -> annotationInfo != null)
+                        .forEach(annotationInfo -> System.out.print(annotationInfo.toStringWithSimpleNames().indent(2)));
             }
         }
     }
