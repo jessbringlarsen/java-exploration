@@ -1,0 +1,21 @@
+= Java Exploration
+
+My personal project for exploring Java APIs.
+
+Currently these JDK versions are covered:
+
+== JDK 11
+
+https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpClient.html[HTTP client]
+[source,java]
+----
+include::src/test/java/dk/bringlarsen/exploration/java/http/HttpClientExplorationTest.java[tags=http-client]
+----
+
+== JDK 14
+
+https://docs.oracle.com/en/java/javase/14/language/records.html[Java Records]
+[source,java]
+----
+include::src/main/java/dk/bringlarsen/exploration/java/model/Car.java[tags=java-records]
+----

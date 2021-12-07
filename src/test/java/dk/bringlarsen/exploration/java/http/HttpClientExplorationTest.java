@@ -44,10 +44,12 @@ public class HttpClientExplorationTest {
 
     @Test
     public void simpleGet() throws URISyntaxException, IOException, InterruptedException {
+        // # tag::http-client[]
         HttpRequest request = HttpRequest.newBuilder(new URI(wireMockRule.url("/persons/1"))).GET().build();
 
         HttpResponse<String> response = HttpClient.newHttpClient()
         .send(request, HttpResponse.BodyHandlers.ofString());
+        // # end::http-client[]
     
         assertThat(response.body(), CoreMatchers.is("id: 1"));
     }

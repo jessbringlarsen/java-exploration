@@ -14,7 +14,9 @@ import dk.bringlarsen.exploration.java.JDK;
  * </ul>
  */
 @JDK(version = 14, description = "Java records")
+// # tag::java-records[]
 public record Car(String make, String model) {
+// # end::java-records[]
 
     public Car(String make) {
         this(make, "unknown");
