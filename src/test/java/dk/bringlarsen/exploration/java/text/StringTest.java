@@ -1,4 +1,4 @@
-package dk.bringlarsen.exploration.java.string;
+package dk.bringlarsen.exploration.java.text;
 
 import dk.bringlarsen.exploration.java.JDK;
 import org.junit.jupiter.api.Test;
