@@ -10,7 +10,7 @@
     <name>jla-java-exploration</name>
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>19</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sonar.projectKey>jessbringlarsen_java-exploration</sonar.projectKey>
         <sonar.organization>jessbringlarsen-github</sonar.organization>
