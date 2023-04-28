@@ -7,8 +7,8 @@ import java.util.*;
 
 import static java.util.stream.Collectors.*;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 public class GroupingByExplorationTest {
 
@@ -62,15 +62,33 @@ public class GroupingByExplorationTest {
     @Test
     public void testGroupByAgeSummingByWeight() {
         List<Person> persons = Arrays.asList(
-                Person.create(20, 80,"Person1"),
-                Person.create(20, 80,"Person2"),
-                Person.create(23, 80,"Person3"),
-                Person.create(23, 80,"Person4"));
+                Person.create(20, 80, "Person1"),
+                Person.create(20, 80, "Person2"),
+                Person.create(23, 80, "Person3"),
+                Person.create(23, 80, "Person4"));
 
         Map<Integer, Integer> result = persons.stream()
                 .collect(groupingBy(Person::getAge, summingInt(Person::getWeight)));
 
         assertThat(result.size(), is(2));
         assertThat(new ArrayList<>(result.values()), everyItem(is(160)));
+    }
+
+    @Test
+    public void testGroupByAgeAndFindOldestPersons() {
+        List<Person> persons = Arrays.asList(
+                Person.create(20, 80, "Person1"),
+                Person.create(20, 80, "Person2"),
+                Person.create(23, 80, "Person3"),
+                Person.create(23, 80, "Person4"));
+
+        Map.Entry<Integer, Long> personsGroupedByAge = persons.stream()
+                .collect(groupingBy(Person::getAge, counting()))
+                .entrySet().stream()
+                .max(Map.Entry.comparingByKey())
+                .get();
+
+        assertThat(personsGroupedByAge.getKey(), is(23));
+        assertThat(personsGroupedByAge.getValue(), is(2L));
     }
 }
