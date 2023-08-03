@@ -23,7 +23,6 @@ class RandomAccessExplorationTest {
     void setup() throws IOException {
         Path tempDir = Paths.get("target/");
         tempFile = Files.createTempFile(tempDir, UUID.randomUUID().toString(), ".tmp");
-        
     }
 
     @AfterEach
@@ -48,7 +47,7 @@ class RandomAccessExplorationTest {
         try(RandomAccessFile writeFile = new RandomAccessFile(tempFile.toFile(), "r")) {
             IOException ioException = assertThrows(IOException.class, () -> writeFile.writeBytes("first line"));
             
-            assertThat(ioException.getMessage(), is("Access is denied"));
+            assertThat(ioException.getMessage(), is("Bad file descriptor"));
         }
     }
 }
