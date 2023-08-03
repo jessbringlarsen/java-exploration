@@ -25,10 +25,10 @@ import static org.junit.jupiter.api.condition.OS.WINDOWS;
 class CreateFileExplorationTest {
 
     private Path tempFile;
+    private final Path tempDir = Paths.get("target/");
 
     @BeforeEach
     void createFile() throws IOException {
-        Path tempDir = Paths.get("target/");
         tempFile = Files.createTempFile(tempDir, UUID.randomUUID().toString(), ".tmp");
     }
 
@@ -50,7 +50,6 @@ class CreateFileExplorationTest {
         Set<PosixFilePermission> filePermissions = PosixFilePermissions.fromString("r--r--r--");
         FileAttribute<Set<PosixFilePermission>> fileAttribute = PosixFilePermissions.asFileAttribute(filePermissions);
 
-        Path tempDir = Paths.get(System.getenv("TEMP"));
         tempFile = Files.createTempFile(tempDir, UUID.randomUUID().toString(), ".tmp", fileAttribute);
 
         assertFalse(isWritable(tempFile));

@@ -31,9 +31,9 @@ public class BigDecimalComparisonTest {
     public void whenRoundingDecimal_thenExpectedResult() {
         BigDecimal bd = new BigDecimal("2.5612");
     
-        assertEquals("2.57", bd.round(new MathContext(2, RoundingMode.UP)).toString());
-        assertEquals("2.57", bd.round(new MathContext(2, RoundingMode.CEILING)).toString());
-        assertEquals("2.56", bd.round(new MathContext(2, RoundingMode.DOWN)).toString());
-        assertEquals("2.56", bd.round(new MathContext(2)).toString());
+        assertEquals("2.57", bd.round(new MathContext(3, RoundingMode.UP)).toString());
+        assertEquals("2.57", bd.round(new MathContext(3, RoundingMode.CEILING)).toString());
+        assertEquals("2.56", bd.round(new MathContext(3, RoundingMode.DOWN)).toString());
+        assertEquals("2.56", bd.round(new MathContext(3)).toString());
     }
 }
