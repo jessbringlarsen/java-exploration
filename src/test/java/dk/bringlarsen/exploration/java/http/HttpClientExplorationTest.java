@@ -12,7 +12,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -43,8 +42,8 @@ public class HttpClientExplorationTest {
     }
 
     @Test
-    public void simpleGet() throws URISyntaxException, IOException, InterruptedException {
-        HttpRequest request = HttpRequest.newBuilder(new URI(wireMockRule.url("/persons/1"))).GET().build();
+    public void simpleGet() throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder(URI.create(wireMockRule.url("/persons/1"))).GET().build();
 
         HttpResponse<String> response = HttpClient.newHttpClient()
         .send(request, HttpResponse.BodyHandlers.ofString());
@@ -53,10 +52,10 @@ public class HttpClientExplorationTest {
     }
 
     @Test
-    public void asyncGet() throws URISyntaxException {
+    public void asyncGet() {
         List<HttpRequest> requests = Arrays.asList(
-                HttpRequest.newBuilder(new URI(wireMockRule.url("/persons/1"))).GET().build(),
-                HttpRequest.newBuilder(new URI(wireMockRule.url("/persons/2"))).GET().build());
+                HttpRequest.newBuilder(URI.create(wireMockRule.url("/persons/1"))).GET().build(),
+                HttpRequest.newBuilder(URI.create(wireMockRule.url("/persons/2"))).GET().build());
 
         // @start region="HttpClientExample"
         HttpClient client = HttpClient.newHttpClient();
@@ -80,12 +79,12 @@ public class HttpClientExplorationTest {
      * Example of controlling the thread pool.
      */
     @Test
-    public void asyncFixedThreadPoolGet() throws URISyntaxException {
+    public void asyncFixedThreadPoolGet() {
         ExecutorService executorService = Executors.newFixedThreadPool(2);
 
         List<HttpRequest> requests = Arrays.asList(
-                HttpRequest.newBuilder(new URI(wireMockRule.url("/persons/1"))).GET().build(),
-                HttpRequest.newBuilder(new URI(wireMockRule.url("/persons/2"))).GET().build());
+                HttpRequest.newBuilder(URI.create(wireMockRule.url("/persons/1"))).GET().build(),
+                HttpRequest.newBuilder(URI.create(wireMockRule.url("/persons/2"))).GET().build());
 
         HttpClient client = HttpClient.newBuilder().executor(executorService).build();
         LinkedList<CompletableFuture<String>> responses = requests.stream()
