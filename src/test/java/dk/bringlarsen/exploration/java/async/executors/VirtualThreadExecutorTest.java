@@ -21,7 +21,7 @@ class VirtualThreadExecutorTest {
 
     @Test
     void usingVirutualThreadPoolTest() {
-        // Using try with resources ensures that all threads are done before continuting.
+        // Using try with resources ensures that all threads are done before continuing.
         try (var threadPool = Executors.newVirtualThreadPerTaskExecutor()) {
             threadPool.submit(() -> System.out.println("task 1"));
             threadPool.submit(() -> System.out.println("task 2"));
