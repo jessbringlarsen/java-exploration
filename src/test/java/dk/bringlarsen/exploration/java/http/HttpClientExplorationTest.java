@@ -58,12 +58,14 @@ public class HttpClientExplorationTest {
                 HttpRequest.newBuilder(new URI(wireMockRule.url("/persons/1"))).GET().build(),
                 HttpRequest.newBuilder(new URI(wireMockRule.url("/persons/2"))).GET().build());
 
+        // @start region="HttpClientExample"
         HttpClient client = HttpClient.newHttpClient();
         LinkedList<CompletableFuture<String>> responses = requests.stream()
           .map(request -> client
             .sendAsync(request, HttpResponse.BodyHandlers.ofString())
             .thenApply(HttpResponse::body))
           .collect(Collectors.toCollection(LinkedList::new));
+        // @end
 
         List<String> results = responses.stream()
                 .map(CompletableFuture::join)
