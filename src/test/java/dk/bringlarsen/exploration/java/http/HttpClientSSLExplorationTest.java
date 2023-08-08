@@ -29,7 +29,7 @@ public class HttpClientSSLExplorationTest {
         SSLContext sslContext = SSLContext.getInstance("TLS");
         sslContext.init(null, trustManager, new SecureRandom());
 
-        HttpRequest request = HttpRequest.newBuilder(new URI("https://expired.badssl.com/")).GET().build();
+        HttpRequest request = HttpRequest.newBuilder(URI.create("https://expired.badssl.com/")).GET().build();
         HttpClient httpClient = HttpClient.newBuilder().sslContext(sslContext).build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         
